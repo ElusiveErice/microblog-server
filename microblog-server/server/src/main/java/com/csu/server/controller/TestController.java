@@ -7,24 +7,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@Controller
+@RestController
 public class TestController {
-    @Autowired(required = false)
-
+    @Resource
     private UserMapper userMapper;
 
     @ResponseBody
-    @RequestMapping(value = {"/query"},method = RequestMethod.GET)
-    public List<User> queryalluser(){
-        List<User>list = userMapper.query();
-        return list;
+    @RequestMapping(value = {"/query"},method=RequestMethod.GET)
+    public List<User>find(){
+        return userMapper.find();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    @RequestMapping("hello")
     public String hello(){
         return  "HelloWorld";
     }
