@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    List<User> query();
+    List<User> find();
 }
