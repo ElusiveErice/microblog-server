@@ -1,13 +1,13 @@
 package com.csu.server.controller;
 
 import com.csu.server.mapper.UserMapper;
+import com.csu.server.model.LoginData;
+import com.csu.server.model.LoginUser;
+import com.csu.server.model.Response;
 import com.csu.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,7 +18,7 @@ public class TestController {
     private UserMapper userMapper;
 
     @ResponseBody
-    @RequestMapping(value = {"/query"},method=RequestMethod.GET)
+    @RequestMapping(value = {"/query"},method=RequestMethod.POST)
     public List<User>find(){
         return userMapper.find();
     }
@@ -28,6 +28,5 @@ public class TestController {
     public String hello(){
         return  "HelloWorld";
     }
-
 
 }
