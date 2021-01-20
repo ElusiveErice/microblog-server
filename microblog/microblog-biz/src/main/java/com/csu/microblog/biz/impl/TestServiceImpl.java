@@ -15,6 +15,6 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public String hello() {
-        return userMapper.login(1001);
+        return userMapper.login(1001).getPassword();
     }
 }

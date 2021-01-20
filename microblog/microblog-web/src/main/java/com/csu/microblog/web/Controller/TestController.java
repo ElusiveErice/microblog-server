@@ -1,15 +1,18 @@
 package com.csu.microblog.web.Controller;
 
 import com.csu.microblog.biz.TestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private TestService testService;
