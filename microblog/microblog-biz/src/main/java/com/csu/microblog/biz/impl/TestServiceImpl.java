@@ -6,6 +6,7 @@ import com.csu.microblog.dao.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @Service
 public class TestServiceImpl implements TestService {
@@ -16,5 +17,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public String hello() {
         return userMapper.login(1001).getPassword();
+    }
+
+    @Override
+    public Map<String,String> upload() {
+        return null;
     }
 }
