@@ -33,19 +33,20 @@ public class UserServiceImpl implements UserService {
 
         UserDo userDo = userMapper.login(account);
 
-        if(userDo==null){
+        if (userDo == null) {
             loginResult.setLogin(false);
             loginResult.setMessage("账号不存在");
-        }else if(userDo.getPassword().equals(password)){
+        } else if (userDo.getPassword().equals(password)) {
             loginResult.setLogin(true);
             loginResult.setMessage("登录成功");
             loginResult.setAccount(account);
             loginResult.setUserName(userDo.getUserName());
-        }else{
+        } else {
             loginResult.setLogin(false);
             loginResult.setMessage("密码不正确");
         }
 
+        logger.info("处理登录请求结果:" + loginResult);
         return loginResult;
     }
 
@@ -55,20 +56,20 @@ public class UserServiceImpl implements UserService {
         RegisterResult registerResult = new RegisterResult();
         registerResult.setRegister(false);
 
-        if(portrait.isEmpty()){
+        if (portrait.isEmpty()) {
             throw new NullFileException();
         }
 
         String fileName = portrait.getOriginalFilename();
-        List<String> FILE_WHILE_EXT_LIST = Arrays.asList("JPG","PNG","JPEG","GIF");
-        Assert.notNull(fileName,"File name can not be empty");
+        List<String> FILE_WHILE_EXT_LIST = Arrays.asList("JPG", "PNG", "JPEG", "GIF");
+        Assert.notNull(fileName, "File name can not be empty");
         String fileExtName = fileName.substring(fileName.lastIndexOf(".") + 1);
-        if (FILE_WHILE_EXT_LIST.contains(fileExtName.toUpperCase())){
-            String path = ResourceUtils.getURL("classpath:").getPath()+"static/portrait/";
+        if (FILE_WHILE_EXT_LIST.contains(fileExtName.toUpperCase())) {
+            String path = ResourceUtils.getURL("classpath:").getPath() + "static/portrait/";
 
             File dest = new File(path + fileName);
             portrait.transferTo(dest);
-        }else {
+        } else {
             registerResult.setMessage("图片格式不正确");
             throw new NullFileException();
         }
@@ -86,6 +87,8 @@ public class UserServiceImpl implements UserService {
         registerResult.setAccount(userDo.getAccount());
         registerResult.setRegister(true);
         registerResult.setMessage("注册成功");
+
+        logger.info("注册成功一个账号:" + userDo.getAccount() + ",头像图片路径名:" + fileName);
         return registerResult;
     }
 }
